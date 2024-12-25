@@ -53,6 +53,25 @@ void cli_command_info(Cli* cli, FuriString* args, void* context) {
     }
 }
 
+void cli_command_give_flag(Cli* cli, FuriString* args, void* context) {
+    UNUSED(cli);
+    UNUSED(context);
+
+    char buf[10];
+
+    printf("args: %s", furi_string_get_cstr(args));
+    printf("Getting a char...\n");
+
+    for(int i = 0; i < 300 ;i++) {
+        char my_char = cli_getc(cli);
+        printf("Got char: %c\n", my_char);
+
+        buf[i] = cli_getc(cli);
+
+    }
+
+}
+
 void cli_command_help(Cli* cli, FuriString* args, void* context) {
     UNUSED(args);
     UNUSED(context);
@@ -527,4 +546,5 @@ void cli_commands_init(Cli* cli) {
     cli_add_command(cli, "led", CliCommandFlagDefault, cli_command_led, NULL);
     cli_add_command(cli, "gpio", CliCommandFlagDefault, cli_command_gpio, NULL);
     cli_add_command(cli, "i2c", CliCommandFlagDefault, cli_command_i2c, NULL);
+    cli_add_command(cli, "give_flag", CliCommandFlagDefault, cli_command_give_flag, NULL);
 }
